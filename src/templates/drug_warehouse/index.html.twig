@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DrugWarehouse{% endblock %}
+
+{% block body %}
+    <h1>DrugWarehouse</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for drug_warehouse in drug_warehouses %}
+            <tr>
+                <td>{{ drug_warehouse.id }}</td>
+                <td>{{ drug_warehouse.name }}</td>
+                <td>{{ drug_warehouse.address }}</td>
+                <td>
+                    <a href="{{ path('app_drug_warehouse_show', {'id': drug_warehouse.id}) }}">show</a>
+                    <a href="{{ path('app_drug_warehouse_edit', {'id': drug_warehouse.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_drug_warehouse_new') }}">Create new</a>
+{% endblock %}

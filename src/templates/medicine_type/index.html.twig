@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List of MedicineTypes{% endblock %}
+
+{% block body %}
+    <h1>List of MedicineTypes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for medicine_type in medicine_types %}
+            <tr>
+                <td>{{ medicine_type.id }}</td>
+                <td>{{ medicine_type.name }}</td>
+                <td>
+                    <a href="{{ path('app_medicine_type_show', {'id': medicine_type.id}) }}">show</a>
+                    <a href="{{ path('app_medicine_type_edit', {'id': medicine_type.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_medicine_type_new') }}">Create new</a>
+{% endblock %}

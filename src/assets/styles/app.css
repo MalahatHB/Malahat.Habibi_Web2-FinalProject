@@ -1,0 +1,40 @@
+body {
+    background-color: lightsteelblue;
+}
+
+h1 {
+    color: #0f5132;
+}
+
+p {
+    color: #1d784a;
+}
+
+a {
+    color: #1d784a;
+}
+
+a:hover {
+    color: #0f5132;
+}
+
+label {
+    color: #0f5132;
+}
+
+input {
+    border-radius: 5px;
+}
+
+button {
+    border-radius: 5px;
+    color: black;
+    background-color: #1d784a;
+}
+
+.example-wrapper {
+    margin: 80px auto;
+    max-width: 800px;
+    width: 95%;
+    font: 18px/1.5 sans-serif;
+}
