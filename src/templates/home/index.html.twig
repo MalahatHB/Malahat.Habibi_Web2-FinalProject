@@ -7,7 +7,11 @@
 <div class="example-wrapper">
     <h1>Welcome to the drug distribution website</h1>
 
-    <p>On this website, you can buy the medicine you want and keep your pharmacy updated.</p>
-    <p>If you have any questions, you can contact us in the <strong><i>Contact us</i></strong> section.</p>
+    <ul>
+    {% for drugWarehouse in drugWarehouseList %}
+        <li><a href="{{ path('app_drug_shop', {'id': drugWarehouse.id}) }}">{{ drugWarehouse.name }}</a></li>
+    {% endfor %}
+    </ul>
+
 </div>
 {% endblock %}

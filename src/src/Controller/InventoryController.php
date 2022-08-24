@@ -2,9 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\DrugWarehouse;
 use App\Entity\Inventory;
+use App\Entity\Pharmacy;
+use App\Entity\User;
 use App\Form\InventoryType;
+use App\Repository\DrugWarehouseRepository;
 use App\Repository\InventoryRepository;
+use App\Repository\PharmacyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,13 +27,27 @@ class InventoryController extends AbstractController
     }
 
     #[Route('/new', name: 'app_inventory_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, InventoryRepository $inventoryRepository): Response
+    public function new(Request $request, InventoryRepository $inventoryRepository, DrugWarehouseRepository $drugWarehouseRepository, PharmacyRepository $pharmacyRepository): Response
     {
         $inventory = new Inventory();
         $form = $this->createForm(InventoryType::class, $inventory);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+//        /** @var User $user */
+//        if(in_array('ROLE_PHARMACY_MANAGER', $user->getRoles())){
+//            /** @var Pharmacy $pharmacy */
+//            $pharmacy = $pharmacyRepository->findBy(['createdUser' => $user]);
+//            $pharmacy->addInventory($inventory);
+//            $entityManager->persist($pharmacy);
+//        } elseif (in_array('ROLE_WAREHOUSE_KEEPER', $user->getRoles())){
+//            /** @var DrugWarehouse $drugWarehouse */
+//            $drugWarehouse = $drugWarehouseRepository->findBy(['createdUser' => $user]);
+//            $drugWarehouse->addInventory($inventory);
+//            $entityManager->persist($drugWarehouse);
+//        }
+//        $entityManager->flush();
+
             $inventoryRepository->add($inventory, true);
 
             return $this->redirectToRoute('app_inventory_index', [], Response::HTTP_SEE_OTHER);

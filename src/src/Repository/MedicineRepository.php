@@ -39,28 +39,17 @@ class MedicineRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Medicine[] Returns an array of Medicine objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('m.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function searchByName($medicineNamePart) {
 
-//    public function findOneBySomeField($value): ?Medicine
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $qb = $this->createQueryBuilder('h');
+
+        return $qb
+            ->andWhere(
+                $qb->expr()->like('h.name', ':name')
+            )
+            ->setParameter('name', "%$medicineNamePart%")
+            ->orderBy('h.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

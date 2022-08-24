@@ -4,10 +4,18 @@ namespace App\Entity;
 
 use App\Repository\InventoryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Model\TimeLoggerInterface;
+use App\Model\UserLoggerInterface;
+use App\Model\TimeLoggerTrait;
+use App\Model\UserLoggerTrait;
 
 #[ORM\Entity(repositoryClass: InventoryRepository::class)]
-class Inventory
+class Inventory implements TimeLoggerInterface, UserLoggerInterface
 {
+    use UserLoggerTrait;
+    use TimeLoggerTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -17,6 +25,7 @@ class Inventory
     private ?Medicine $medicine = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank()]
     private ?int $total = null;
 
     #[ORM\ManyToOne(inversedBy: 'inventory')]

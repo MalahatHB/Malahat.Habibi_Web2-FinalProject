@@ -13,10 +13,7 @@ class InventoryType extends AbstractType
     {
         $builder
             ->add('total')
-            ->add('medicine')
-            ->add('pharmacy')
-            ->add('drugWarehouse')
-        ;
+            ->add('medicine');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

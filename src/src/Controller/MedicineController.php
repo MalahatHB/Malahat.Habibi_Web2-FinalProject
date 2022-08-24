@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Medicine;
 use App\Form\MedicineType;
+use App\Medicine\SearchService;
 use App\Repository\MedicineRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,6 +38,18 @@ class MedicineController extends AbstractController
         return $this->renderForm('medicine/new.html.twig', [
             'medicine' => $medicine,
             'form' => $form,
+        ]);
+    }
+
+    /**
+     * @Route("/{_locale}/medicine/search", name="app_medicine_search", methods={"GET"}, defaults={"_locale":"en"}, requirements={"_locale":"en|de"})
+     */
+    public function search(Request $request, SearchService $medicineSearchService): Response {
+        $query = $request->query->get('q');
+
+        return $this->render('medicine/index.html.twig', [
+            'q'      => $query,
+            'medicines' => $medicineSearchService->search($query),
         ]);
     }
 

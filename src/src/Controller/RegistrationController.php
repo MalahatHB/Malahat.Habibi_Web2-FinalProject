@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\DrugWarehouse;
+use App\Entity\Pharmacy;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,6 +30,25 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+
+            $role = $form->get('role')->getData();
+//            $name = $form->get('name')->getData();
+//            $address = $form->get('address')->getData();
+//            $city = $form->get('city')->getData();
+//            $type = $form->get('type')->getData();
+
+            $user->setRoles([$role]);
+//            if(in_array('ROLE_PHARMACY_MANAGER', $user->getRoles())){
+//                $drugWarehouse = new DrugWarehouse();
+//                $drugWarehouse->setName($name);
+//                $drugWarehouse->setAddress($address);
+//            } elseif (in_array('ROLE_WAREHOUSE_KEEPER', $user->getRoles())){
+//                $pharmacy = new Pharmacy();
+//                $pharmacy->setName($name);
+//                $pharmacy->setAddress($address);
+//                $pharmacy->setCity($city);
+//                $pharmacy->setType($type);
+//            }
 
             $entityManager->persist($user);
             $entityManager->flush();
